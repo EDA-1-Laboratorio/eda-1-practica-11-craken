@@ -142,14 +142,14 @@ esquema recursivo:
 ¿Cuándo es el subarreglo tan pequeño que la respuesta es inmediata? ¿Qué devuelves
 en ese caso?
 
-> Escribe aquí tu respuesta: *"El paso base se da cuando `lo > hi`, lo que significa que
+> *"El paso base se da cuando `lo > hi`, lo que significa que
 > el subarreglo está vacío. En ese caso devolvemos un valor negativo, -1."*
 
 **Hipótesis inductiva:**  
 Supón que `busqueda_binaria(arr, objetivo, lo, mid-1)` devuelve correctamente el índice
 del objetivo dentro del subarreglo `arr[lo..mid-1]`, o `-1` si no existe.
 
-> Completa: *"Supongo que `busqueda_binaria(arr, objetivo, mid+1, hi)` devuelve el
+> *"Supongo que `busqueda_binaria(arr, objetivo, mid+1, hi)` devuelve el
 > índice de objetivo dentro del subarreglo derecho o -1 si no existe esa mitad."*
 
 **Paso recursivo:**  
