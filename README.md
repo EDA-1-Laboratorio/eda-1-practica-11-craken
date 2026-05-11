@@ -143,18 +143,25 @@ esquema recursivo:
 en ese caso?
 
 > Escribe aquí tu respuesta: *"El paso base se da cuando `lo > hi`, lo que significa que
-> el subarreglo está vacío. En ese caso devolvemos …"*
+> el subarreglo está vacío. En ese caso devolvemos un valor negativo, -1."*
 
 **Hipótesis inductiva:**  
 Supón que `busqueda_binaria(arr, objetivo, lo, mid-1)` devuelve correctamente el índice
 del objetivo dentro del subarreglo `arr[lo..mid-1]`, o `-1` si no existe.
 
-> Completa: *"Supongo que `busqueda_binaria(arr, objetivo, mid+1, hi)` devuelve …"*
+> Completa: *"Supongo que `busqueda_binaria(arr, objetivo, mid+1, hi)` devuelve el
+> índice de objetivo dentro del subarreglo derecho o -1 si no existe esa mitad."*
 
 **Paso recursivo:**  
 ¿Cómo reduces el problema al subarreglo correcto y combinas la respuesta?
 
-> Escribe aquí tu descripción en prosa antes de pasar al código.
+> *"Se calcula el índice medio del arreglo. El valor de ese índice se compara con el valor
+> que estoy buscando.Si son iguales, termina la búsqueda. Si el valor objetivo es menor al
+> valor del índice central, se llama a la función búsqueda_binaria, pero reduciendo el
+> rango de búsqueda, correspondiente a la mitad izquierda. Si el valor objetivo es mayor
+> al valor del índice medio, se llama a la misma función y se reduce el rango
+> correspondiente a la mitad derecha. Así sucesivamente, se toma la decisión de que
+> lado ir de acuerdo a lo que devuelva la función.*"
 
 ### 1.4 Problema A — Implementación
 
