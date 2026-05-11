@@ -117,13 +117,17 @@ def quicksort_aleatorio(arr: list, lo: int = 0, hi: int = None) -> None:
 # Problema D – Versión instrumentada con contador de comparaciones
 # ---------------------------------------------------------------------------
 
-def _particiona_conteo(arr: list, lo: int, hi: int, conteo: list) -> int:
+def _particiona_conteo(arr: list, lo: int, hi: int, conteo: list, rand: int) -> int:
     """
     Igual que particiona, pero incrementa conteo[0] en cada comparación
     arr[j] <= pivot dentro del ciclo.
     """
+
+    if rand != None:
+        idx = random.randrange(lo,hi+1)
+        arr[hi], arr[idx] = arr[idx], arr[hi]
     pivot = arr[hi]
-    i = lo - 1
+    i = lo-1
 
     for j in range(lo, hi):
         conteo[0] += 1          # comparación con el pivote
@@ -135,7 +139,7 @@ def _particiona_conteo(arr: list, lo: int, hi: int, conteo: list) -> int:
     return i + 1
 
 
-def quicksort_conteo(arr: list, lo: int, hi: int, conteo: list) -> None:
+def quicksort_conteo(arr: list, lo: int, hi: int, conteo: list, rand:int) -> None:
     """
     Igual que quicksort, pero acumula el número de comparaciones en conteo[0].
 
@@ -145,12 +149,15 @@ def quicksort_conteo(arr: list, lo: int, hi: int, conteo: list) -> None:
         quicksort_conteo(arr, 0, len(arr) - 1, conteo)
         print(f"Comparaciones: {conteo[0]}")
     """
+
     if lo >= hi:
         return
+      
 
-    p = _particiona_conteo(arr, lo, hi, conteo)
-    quicksort_conteo(arr, lo, p - 1, conteo)
-    quicksort_conteo(arr, p + 1, hi, conteo)
+    p = _particiona_conteo(arr, lo, hi, conteo, rand)
+    quicksort_conteo(arr, lo, p - 1, conteo, rand)
+    quicksort_conteo(arr, p + 1, hi, conteo, rand)
+    pass
 
 
 # ---------------------------------------------------------------------------
@@ -225,21 +232,22 @@ def _experimento_comparaciones():
         # Aleatorio
         arr = generar_arreglo(n, 'aleatorio')
         c_al = [0]
-        quicksort_conteo(arr, 0, n - 1, c_al)
+        quicksort_conteo(arr, 0, n - 1, c_al, None)
 
         # Ordenado, pivote fijo (peor caso)
         arr = generar_arreglo(n, 'ordenado')
         c_ord = [0]
-        quicksort_conteo(arr, 0, n - 1, c_ord)
+        quicksort_conteo(arr, 0, n - 1, c_ord, None)
 
         # Ordenado, pivote aleatorio (esperado O(n log n))
         arr = generar_arreglo(n, 'ordenado')
         c_rand = [0]
+        quicksort_conteo(arr,0, n-1, c_rand, 1)
         # Para instrumentar quicksort_aleatorio necesitaríamos otra versión;
         # aquí usamos quicksort_conteo sólo para el pivote fijo.
         # (Actividad: extiende quicksort_conteo para usar pivote aleatorio.)
 
-        print(f"{n:>8,} {c_al[0]:>12,} {c_ord[0]:>17,} {'(ver actividad)':>19}")
+        print(f"{n:>8,} {c_al[0]:>12,} {c_ord[0]:>17,} {c_rand[0]:>19,}")
 
 
 def _experimento_tiempo():
