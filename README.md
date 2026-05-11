@@ -1,3 +1,5 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/u-RYJRjY)
+[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=23860037&assignment_repo_type=AssignmentRepo)
 # Guía práctica: Diseño de algoritmos recursivos
 
 ## Objetivo general
@@ -140,19 +142,26 @@ esquema recursivo:
 ¿Cuándo es el subarreglo tan pequeño que la respuesta es inmediata? ¿Qué devuelves
 en ese caso?
 
-> Escribe aquí tu respuesta: *"El paso base se da cuando `lo > hi`, lo que significa que
-> el subarreglo está vacío. En ese caso devolvemos …"*
+> *"El paso base se da cuando `lo > hi`, lo que significa que
+> el subarreglo está vacío. En ese caso devolvemos un valor negativo, -1."*
 
 **Hipótesis inductiva:**  
 Supón que `busqueda_binaria(arr, objetivo, lo, mid-1)` devuelve correctamente el índice
 del objetivo dentro del subarreglo `arr[lo..mid-1]`, o `-1` si no existe.
 
-> Completa: *"Supongo que `busqueda_binaria(arr, objetivo, mid+1, hi)` devuelve …"*
+> *"Supongo que `busqueda_binaria(arr, objetivo, mid+1, hi)` devuelve el
+> índice de objetivo dentro del subarreglo derecho o -1 si no existe esa mitad."*
 
 **Paso recursivo:**  
 ¿Cómo reduces el problema al subarreglo correcto y combinas la respuesta?
 
-> Escribe aquí tu descripción en prosa antes de pasar al código.
+> *"Se calcula el índice medio del arreglo. El valor de ese índice se compara con el valor
+> que estoy buscando.Si son iguales, termina la búsqueda. Si el valor objetivo es menor al
+> valor del índice central, se llama a la función búsqueda_binaria, pero reduciendo el
+> rango de búsqueda, correspondiente a la mitad izquierda. Si el valor objetivo es mayor
+> al valor del índice medio, se llama a la misma función y se reduce el rango
+> correspondiente a la mitad derecha. Así sucesivamente, se toma la decisión de que
+> lado ir de acuerdo a lo que devuelva la función.*"
 
 ### 1.4 Problema A — Implementación
 
