@@ -40,12 +40,16 @@ def particiona(arr: list, lo: int, hi: int) -> int:
         # TODO: si arr[j] <= pivot:
         #           incrementa i
         #           intercambia arr[i] con arr[j]
+        if arr[j] <= pivot:
+            i+=1;
+            arr[i], arr[j] = arr[j], arr[i]
         pass
 
     # TODO: coloca el pivote en su posición definitiva
     #       intercambia arr[i + 1] con arr[hi]
     # TODO: devuelve i + 1
-
+    arr[i+1], arr[hi] = arr[hi], arr[i+1]
+    return i+1
 
 def particiona_aleatoria(arr: list, lo: int, hi: int) -> int:
     """
@@ -55,7 +59,9 @@ def particiona_aleatoria(arr: list, lo: int, hi: int) -> int:
     # TODO: elige un índice aleatorio entre lo y hi (inclusive)
     # TODO: intercambia arr[idx] con arr[hi]
     # TODO: llama a particiona(arr, lo, hi) y devuelve su resultado
-
+    idx = randrange(lo, hi+1)
+    arr[idx], arr[hi] = arr[hi], arr[idx]
+    return particiona(arr, lo, hi)
 
 # ---------------------------------------------------------------------------
 # Problema B – Quick sort recursivo
@@ -73,17 +79,23 @@ def quicksort(arr: list, lo: int = 0, hi: int = None) -> None:
 
     # PASO BASE
     # TODO: si lo >= hi, el subarreglo tiene 0 o 1 elemento → ya está ordenado
-
+    if lo >= hi:
+        return
     # HIPÓTESIS INDUCTIVA:
     # Supongo que quicksort(arr, lo, p-1) ordena correctamente arr[lo..p-1] y
     # que quicksort(arr, p+1, hi) ordena correctamente arr[p+1..hi].
     # El pivote arr[p] ya está en su posición definitiva tras la partición,
     # por lo que el arreglo completo arr[lo..hi] queda ordenado.
 
+    
+
     # PASO RECURSIVO
     # TODO: 1. p = particiona(arr, lo, hi)
     # TODO: 2. quicksort(arr, lo, p - 1)
     # TODO: 3. quicksort(arr, p + 1, hi)
+    p = particiona(arr, lo , hi)
+    quicksort(arr, lo, p-1)
+    quicksort(arr, p+1, hi)
 
 
 def quicksort_aleatorio(arr: list, lo: int = 0, hi: int = None) -> None:
@@ -94,7 +106,12 @@ def quicksort_aleatorio(arr: list, lo: int = 0, hi: int = None) -> None:
         hi = len(arr) - 1
 
     # TODO: mismo esquema que quicksort, pero llamando a particiona_aleatoria
-
+    if lo >= hi:
+        return
+    
+    p = particiona_aleatoria(arr, lo , hi)
+    quicksort_aleatorio(arr, lo, p-1)
+    quicksort_aleatorio(arr, p+1, hi)
 
 # ---------------------------------------------------------------------------
 # Problema D – Versión instrumentada con contador de comparaciones
